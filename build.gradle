@@ -3,27 +3,29 @@ plugins {
     id 'maven-publish'
 }
 
+def localRepoUrl = "file://" + System.getProperty("user.home") + "/gradle-repo"
+
 repositories {
     jcenter()
     maven {
         name = 'localRepo'
-        url = "file://Users/charlescamp/Work/repo"
+        url = localRepoUrl
     }
 }
 
 dependencies {
     implementation 'com.google.guava:guava:20.0'
     implementation 'com.zaxxer:HikariCP:2.4.7'
-    implementation 'org.javassist:javassist:3.18.2-GA'
     implementation 'mysql:mysql-connector-java:5.1.32'
+    implementation 'org.javassist:javassist:3.18.2-GA'
+    implementation 'org.mirraj2:ox:0.0.1'
     implementation 'org.slf4j:slf4j-api:1.7.2'
     implementation 'org.slf4j:slf4j-simple:1.7.2'
-    implementation 'org.mirraj2:ox:0.0.1'
 }
 
 publishing {
     publications {
-        ox(MavenPublication) {
+        ezdb(MavenPublication) {
             from components.java
         }
     }
@@ -31,7 +33,7 @@ publishing {
     repositories {
         maven {
             name = 'localRepo'
-            url = "file://Users/charlescamp/Work/repo"
+            url = localRepoUrl
         }
     }
 }
